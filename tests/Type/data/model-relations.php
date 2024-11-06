@@ -99,6 +99,10 @@ function test(
     assertType('App\Account', $user->accounts()->sole());
     assertType('App\Group', $user->group()->sole());
     assertType('App\Post', $user->posts()->sole());
+
+//    $user->posts()->where(function (\Illuminate\Database\Eloquent\Builder $query) {
+//        assertType('App\PostBuilder', $query);
+//    });
 }
 
 /**
