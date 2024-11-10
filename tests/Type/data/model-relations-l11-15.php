@@ -7,6 +7,7 @@ use App\Group;
 use App\Post as AppPost;
 use App\User as AppUser;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -245,6 +246,10 @@ function test(
     assertType('Illuminate\Database\Eloquent\Relations\MorphToMany<ModelRelationsL11\Tag, ModelRelationsL11\Post>', $post->tags());
     assertType('Illuminate\Database\Eloquent\Collection<int, ModelRelationsL11\Tag>', $post->tags()->getResults());
     assertType('Illuminate\Database\Eloquent\Collection<int, ModelRelationsL11\Tag>', $post->tags);
+
+    $user->roles()->where(function (Builder $query) {
+        assertType('Illuminate\Database\Eloquent\Builder<ModelRelationsL11\Role>', $query);
+    });
 }
 
 /**

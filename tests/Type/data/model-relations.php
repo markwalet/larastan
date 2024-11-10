@@ -6,6 +6,7 @@ use App\Account;
 use App\Group;
 use App\Post;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -100,9 +101,13 @@ function test(
     assertType('App\Group', $user->group()->sole());
     assertType('App\Post', $user->posts()->sole());
 
-//    $user->posts()->where(function (\Illuminate\Database\Eloquent\Builder $query) {
-//        assertType('App\PostBuilder', $query);
-//    });
+    $user->posts()->where(function (Builder $query) {
+        assertType('App\PostBuilder<App\Post>', $query);
+    });
+
+    $user->roles()->where(function (Builder $query) {
+        assertType('Illuminate\Database\Eloquent\Builder<App\Role>', $query);
+    });
 }
 
 /**
