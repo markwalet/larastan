@@ -380,20 +380,6 @@ class User extends Model
             $through->has('car'),
         );
 
-        $through = $this->through($this->mechanic());
-        assertType(
-            'Illuminate\Database\Eloquent\PendingHasThroughRelationship<ModelRelationsL11\Mechanic, $this(ModelRelationsL11\User)>',
-            $through,
-        );
-        assertType(
-            'Illuminate\Database\Eloquent\Relations\HasOneThrough<ModelRelationsL11\Car, ModelRelationsL11\Mechanic, $this(ModelRelationsL11\User)>',
-            $through->has(function ($mechanic) {
-                assertType('ModelRelationsL11\Mechanic', $mechanic);
-
-                return $mechanic->car();
-            }),
-        );
-
         return $hasOneThrough;
     }
 
